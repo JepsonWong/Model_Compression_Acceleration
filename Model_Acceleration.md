@@ -4,6 +4,32 @@
 
 ## Automatic Mixed Precision (AMP)
 
+Benefits:
+
+* Decrease the required amount of memory.
+* Shorten the training or inference time.
+
+Problem:
+
+* Overflow / Underflow: The effective representation range of fp16 is much narrower than single precision float. For deep learning, the biggest problem is Underflow. At the end of training, for example, the gradient of the activation function will be very small, and even after the gradient is multiplied by the learning rate, the value will be **even smaller**.
+* Rounding Error
+
+Techniques:
+
+* Accumulation into FP32: Solve the problem of rounding errors. Use FP16 for storage and multiplication in memory to speed up calculations, and FP32 for accumulation to avoid rounding errors.
+* Loss Scaling: Solve the problem of Underflow.
+* TensorCore [Optimizing For Tensor Cores](https://docs.nvidia.com/deeplearning/performance/mixed-precision-training/index.html)
+* NHWC [Volta Tensor Core GPU Achieves New AI Performance Milestones](https://devblogs.nvidia.com/tensor-core-ai-performance-milestones/)
+
+Reference:
+
+* [浅谈混合精度训练](https://zhuanlan.zhihu.com/p/103685761)
+* [【PyTorch】唯快不破：基于Apex的混合精度加速](https://zhuanlan.zhihu.com/p/79887894)
+* [Mixed-Precision Training of Deep Neural Networks](https://devblogs.nvidia.com/mixed-precision-training-deep-neural-networks/)
+* [Mixed Precision Training](https://arxiv.org/abs/1710.03740)
+* [mixed-precision-training](https://s0docs0nvidia0com.icopy.site/deeplearning/performance/mixed-precision-training/index.html)
+* [Mixed Precision Training 混合精度训练 百度和英伟达联合发表 ICLR 2018](https://blog.csdn.net/yyl424525/article/details/97761848)
+
 # Optimization tools and libraries
 
 ## TensorRT (Nvidia)
